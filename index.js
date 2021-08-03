@@ -5,6 +5,9 @@ const client = new Discord.Client(); //Inicializa a interface pessoal do bot
 const buro = require('./modulos/handler.js')
 const dano = require('./modulos/dano_cura.js')
 const slots = require('./modulos/slots')
+const recuperar = require('./modulos/recuperar.js')
+const castar = require('./modulos/castar.js')
+const addFila = require('./modulos/addFila.js')
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
@@ -44,6 +47,38 @@ client.on("message", msg => {
                 msg.channel.send(resposta)
             }
         }
+        if (comandosep[0] == "recuperar") {
+            if(recuperar(comandosep)) {
+                msg.channel.send('```diff\n+' + comandosep[1] + ' recuperou suas magias! <3\n```');
+            }
+            else {
+                msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
+            }
+        }
+        if (comandosep[0] == "castar") {
+            var cast = castar(comandosep);
+            switch(cast) {
+                case "erroNE":
+                    msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
+                    break;
+                case "erroSM":
+                    msg.channel.send('```diff\n-Opa, me parece que o jogador não tem mais slots de magia desse nível, que pena <3');
+                    break;
+                case "sucesso":
+                    msg.channel.send('```diff\n+Uau! ' + comandosep[1] + ' castou uma magia de nível ' + comandosep[2] + ' <3\n```');
+                    break 
+            }
+
+        }
+        if (comandosep[0] == "addfila") {
+            if(addFila(comandosep)) {
+                msg.channel.send("```diff\n+" + comandosep[1] + " foi adicionado à fila. <3```");
+            }
+            else {
+                msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
+            }
+        }
+
     }
 })
 
