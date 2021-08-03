@@ -17,11 +17,19 @@ function criarPer(mensagem) {
         var fs = require('fs');
         var nome = mensagem[1];
         var hp = mensagem[2];
-        var cont = `{\n  "name":"${nome}",\n  "hp":"${hp}",\n}`;
+        var cont = `{\n  "name":"${nome}",\n  "hp":"${hp}",\n`;
+        for (i = 0; i < 8; i++) {
+            cont = cont + `  "magias${i+1}":"${mensagem[i+3]}",\n`
+            cont = cont + `  "magias${i+1}base":"${mensagem[i+3]}",\n`
+        }
+        cont = cont + `  "magias9":"${mensagem[11]}",\n`
+        cont = cont + `  "magias9base":"${mensagem[11]}"\n`
+        
+        cont = cont + "}"
 
         fs.writeFile(`${nome}.json`, cont, function(err) {
             if (err) throw err;
-            console.log("SALVO!;")
+            console.log("SALVO!");
         })
         return true;
     }
