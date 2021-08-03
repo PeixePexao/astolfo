@@ -17,13 +17,14 @@ function criarPer(mensagem) {
         var fs = require('fs');
         var nome = mensagem[1];
         var hp = mensagem[2];
-        var cont = `{\n  "name":"${nome}",\n  "hp":"${hp}",\n`;
+        var iniciativa = mensagem[12]
+        var cont = `{\n  "name":"${nome}",\n  "hp":${hp},\n  "hpbase":${hp},\n  "init":"${iniciativa}",\n`;
         for (i = 0; i < 8; i++) {
-            cont = cont + `  "magias${i+1}":"${mensagem[i+3]}",\n`
-            cont = cont + `  "magias${i+1}base":"${mensagem[i+3]}",\n`
+            cont = cont + `  "magias${i+1}":${mensagem[i+3]},\n`
+            cont = cont + `  "magias${i+1}base":${mensagem[i+3]},\n`
         }
-        cont = cont + `  "magias9":"${mensagem[11]}",\n`
-        cont = cont + `  "magias9base":"${mensagem[11]}"\n`
+        cont = cont + `  "magias9":${mensagem[11]},\n`
+        cont = cont + `  "magias9base":${mensagem[11]}\n`
         
         cont = cont + "}"
 
