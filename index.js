@@ -11,6 +11,7 @@ const addFila = require('./modulos/addFila.js')
 const fila = require('./modulos/fila.js')
 const remFila = require('./modulos/remFila.js')
 const status = require('./modulos/status.js')
+const iniciativa = require('./modulos/iniciativa')
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
@@ -94,6 +95,9 @@ client.on("message", msg => {
         }
         if (comandosep[0] == "status") {
             msg.channel.send(status());
+        }
+        if (comandosep[0] == "iniciativa") {
+            msg.channel.send(iniciativa())
         }
     }
 })
