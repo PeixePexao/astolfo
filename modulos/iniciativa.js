@@ -41,7 +41,7 @@ function iniciativa() {
     const data = fs.readFileSync('fila.csv');
     var linhas = data.toString().split('\n');
     var dados = []
-    var conteudo = '```ml\n'
+    var conteudo = '```ml\n[INICIATIVA]\n'
     for (i = 0; i < linhas.length; i++) {
         if (i != (linhas.length - 1)) {
             var roll = dado(linhas[i]);
