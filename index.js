@@ -10,6 +10,7 @@ const castar = require('./modulos/castar.js')
 const addFila = require('./modulos/addFila.js')
 const fila = require('./modulos/fila.js')
 const remFila = require('./modulos/remFila.js')
+const status = require('./modulos/status.js')
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
@@ -90,6 +91,9 @@ client.on("message", msg => {
             else {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
             }
+        }
+        if (comandosep[0] == "status") {
+            msg.channel.send(status());
         }
     }
 })
