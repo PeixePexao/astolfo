@@ -2,7 +2,7 @@ function status() {
     const fs = require('fs');
     const data = fs.readFileSync('fila.csv');
     var linhas = data.toString().split('\n');
-    var conteudo = "```ml\n"
+    var conteudo = "```ml\n[STATUS]\n\n"
     for (i = 0; i < linhas.length; i++) {
         var nomes = linhas[i].toString().split(',');
         if (fs.existsSync(`${nomes[0]}.json`)) {

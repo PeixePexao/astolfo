@@ -6,7 +6,7 @@ function slots(comando) {
         var conteudo = "```ml\nSLOTS DE MAGIA DE " +pessoa.name + "\n\n"
         for (i = 0; i < 9; i++) {
             if (pessoa[`magias${i+1}base`] != 0) {
-                conteudo = conteudo + `LVL ${i+1}: ${pessoa[`magias${i+1}`]} (de ${pessoa[`magias${i+1}`]} no total)\n`
+                conteudo = conteudo + `LVL ${i+1}: ${pessoa[`magias${i+1}`]} (de ${pessoa[`magias${i+1}base`]} no total)\n`
             }
         }
         conteudo = conteudo + '```'
