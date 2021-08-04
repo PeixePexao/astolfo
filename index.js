@@ -20,7 +20,7 @@ client.on("message", msg => {
         if(comandosep[0] == "criarper" && checkID(msg.author.id)) {
             var cria = criarPer(comandosep);
             if (cria == false) {
-                msg.channel.send('```diff\n-Opa, parece que você mandou o comando errado! A forma correta é -criarper NOME VIDA SL1 SL2 SL3 SL4 SL5 SL6 SL7 SL8 SL9 INICIATIVA\n```')
+                msg.channel.send('```diff\n-Opa, parece que você mandou o comando errado! A forma correta é -criarper NOME VIDA SL1 SL2 SL3 SL4 SL5 SL6 SL7 SL8 SL9\n```')
             }
             else {msg.channel.send('```diff\n+Foi criado o seu personagem. Obrigado por me usar <3\n```')}
         }
