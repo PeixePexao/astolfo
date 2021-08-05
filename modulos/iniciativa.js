@@ -43,8 +43,15 @@ function iniciativa() {
     var dados = []
     for (i = 0; i < linhas.length; i++) {
         if (i != (linhas.length - 1)) {
-            var roll = dado(linhas[i]);
-            dados.push(roll);
+            var igual = true;
+            while(igual) {
+                var roll = dado(linhas[i]);
+                if (!dados.includes(roll)) {
+                    dados.push(roll);
+                    igual = false;
+                }
+            }
+            
         }
     }
     console.log("DADOS = " + dados);
@@ -66,23 +73,8 @@ function arrange(dados, nomes) {
         var propies = linha.split(',');
         nomes_separados.push(propies[0])
     }
-    var contador = 0;
-    var skip = false;
     for (i = 0; i < dados_sort.length; i++) {
-        if (dados_sort[contador] != dados_sort[contador+1] && skip == false) {
-            comp = comp + (i+1) + ". " + nomes_separados[dados.indexOf(dados_sort[contador])] + ": " + dados_sort[contador] + "\n"
-            contador = contador + 1;
-        }
-        else if (skip == true) {
-            skip = false;
-            continue;
-        }
-        else {
-            comp = comp + (i+1) + ". " + nomes_separados[dados.indexOf(dados_sort[contador])] + ": " + dados_sort[contador] + "\n"
-            comp = comp + (i+2) + ". " +  nomes_separados[dados.indexOf(dados_sort[contador])+1] + ": " + dados_sort[contador] + "\n"
-            contador = contador + 2;
-            skip = true;
-        }
+        comp = comp + (i+1) + ". " + nomes_separados[dados.indexOf(dados_sort[i])] + ": " + dados_sort[i] + "\n"
     }
     comp = comp + "```"
     return comp
