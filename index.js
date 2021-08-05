@@ -26,7 +26,7 @@ client.on("message", msg => {
             }
             else {msg.channel.send('```diff\n+Foi criado o seu personagem. Obrigado por me usar <3\n```')}
         }
-        if (comandosep[0] == "dano") {
+        if (comandosep[0] == "dano" && checkID(msg.author.id)) {
             if(dano.dano(comandosep)) {
                 msg.channel.send('```diff\n-Eita! ' + comandosep[1] + ' tomou ' + comandosep[2] + ' pontos de dano!\n```')
             }
@@ -34,7 +34,7 @@ client.on("message", msg => {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
             }
         }
-        if (comandosep[0] == "cura") {
+        if (comandosep[0] == "cura" && checkID(msg.author.id)) {
             if(dano.cura(comandosep)) {
                 msg.channel.send('```diff\nHoje não! ' + comandosep[1] + " regenerou " + comandosep[2] + " pontos de vida! <3\n```");
             }
@@ -42,7 +42,7 @@ client.on("message", msg => {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
             }
         }
-        if (comandosep[0] == "slots") {
+        if (comandosep[0] == "slots" && checkID(msg.author.id)) {
             var resposta = slots(comandosep);
             if (resposta == "errado") {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
@@ -51,7 +51,7 @@ client.on("message", msg => {
                 msg.channel.send(resposta)
             }
         }
-        if (comandosep[0] == "recuperar") {
+        if (comandosep[0] == "recuperar" && checkID(msg.author.id)) {
             if(recuperar(comandosep)) {
                 msg.channel.send('```diff\n+' + comandosep[1] + ' recuperou suas magias! <3\n```');
             }
@@ -59,7 +59,7 @@ client.on("message", msg => {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
             }
         }
-        if (comandosep[0] == "castar") {
+        if (comandosep[0] == "castar" && checkID(msg.author.id)) {
             var cast = castar(comandosep);
             switch(cast) {
                 case "erroNE":
@@ -74,7 +74,7 @@ client.on("message", msg => {
             }
 
         }
-        if (comandosep[0] == "addfila") {
+        if (comandosep[0] == "addfila" && checkID(msg.author.id)) {
             if(addFila(comandosep)) {
                 msg.channel.send("```diff\n+" + comandosep[1] + " foi adicionado à fila. <3```");
             }
@@ -82,10 +82,10 @@ client.on("message", msg => {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
             }
         }
-        if (comandosep[0] == "fila") {
+        if (comandosep[0] == "fila" && checkID(msg.author.id)) {
             msg.channel.send(fila())
         }
-        if (comandosep[0] == "remfila") {
+        if (comandosep[0] == "remfila" && checkID(msg.author.id)) {
             if (remFila(comandosep)) {
                 msg.channel.send("```ml\n" + comandosep[1] + " foi removido da fila de iniciativa!\n```");
             }
@@ -93,10 +93,10 @@ client.on("message", msg => {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
             }
         }
-        if (comandosep[0] == "status") {
+        if (comandosep[0] == "status" && checkID(msg.author.id)) {
             msg.channel.send(status());
         }
-        if (comandosep[0] == "iniciativa") {
+        if (comandosep[0] == "iniciativa" && checkID(msg.author.id)) {
             msg.channel.send(iniciativa())
         }
     }
