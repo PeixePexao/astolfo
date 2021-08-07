@@ -28,3 +28,5 @@
     -cura NOME PONTOS
     -fila
     -status
+    -addtemp NOME PONTOS
+    -remtemp NOME PONTOS
