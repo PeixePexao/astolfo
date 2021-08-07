@@ -12,6 +12,7 @@ const fila = require('./modulos/fila.js')
 const remFila = require('./modulos/remFila.js')
 const status = require('./modulos/status.js')
 const iniciativa = require('./modulos/iniciativa')
+const hptemp = require("./modulos/hptemp.js")
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
@@ -28,7 +29,7 @@ client.on("message", msg => {
         }
         if (comandosep[0] == "dano" && checkID(msg.author.id)) {
             if(dano.dano(comandosep)) {
-                msg.channel.send('```diff\n-Eita! ' + comandosep[1] + ' tomou ' + comandosep[2] + ' pontos de dano!\n```')
+                msg.channel.send('```ml\nEita! ' + comandosep[1] + ' tomou ' + comandosep[2] + ' pontos de dano!\n```')
             }
             else {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
@@ -36,7 +37,7 @@ client.on("message", msg => {
         }
         if (comandosep[0] == "cura" && checkID(msg.author.id)) {
             if(dano.cura(comandosep)) {
-                msg.channel.send('```diff\nHoje não! ' + comandosep[1] + " regenerou " + comandosep[2] + " pontos de vida! <3\n```");
+                msg.channel.send('```ml\nHoje não! ' + comandosep[1] + " regenerou " + comandosep[2] + " pontos de vida! <3\n```");
             }
             else {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
@@ -53,7 +54,7 @@ client.on("message", msg => {
         }
         if (comandosep[0] == "recuperar" && checkID(msg.author.id)) {
             if(recuperar(comandosep)) {
-                msg.channel.send('```diff\n+' + comandosep[1] + ' recuperou suas magias! <3\n```');
+                msg.channel.send('```ml\n' + comandosep[1] + ' recuperou suas magias! <3\n```');
             }
             else {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
@@ -69,14 +70,14 @@ client.on("message", msg => {
                     msg.channel.send('```diff\n-Opa, me parece que o jogador não tem mais slots de magia desse nível, que pena <3');
                     break;
                 case "sucesso":
-                    msg.channel.send('```diff\n+Uau! ' + comandosep[1] + ' castou uma magia de nível ' + comandosep[2] + ' <3\n```');
+                    msg.channel.send('```ml\nUau! ' + comandosep[1] + ' castou uma magia de nível ' + comandosep[2] + ' <3\n```');
                     break 
             }
 
         }
         if (comandosep[0] == "addfila" && checkID(msg.author.id)) {
             if(addFila(comandosep)) {
-                msg.channel.send("```diff\n+" + comandosep[1] + " foi adicionado à fila. <3```");
+                msg.channel.send("```ml\n" + comandosep[1] + " foi adicionado à fila. <3```");
             }
             else {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
@@ -98,6 +99,14 @@ client.on("message", msg => {
         }
         if (comandosep[0] == "iniciativa" && checkID(msg.author.id)) {
             msg.channel.send(iniciativa())
+        }
+        if (comandosep[0] == "addtemp" && checkID(msg.author.id)) {
+            if (hptemp.addtemp(comandosep)) {msg.channel.send("```ml\n" + comandosep[1] + "ganhou " + comandosep[2] + " pontos de vida temporários\n```") }
+            else {msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');}
+        }
+        if (comandosep[0] == "remtemp" && checkID(msg.author.id)) {
+            if (hptemp.remtemp(comandosep)) {msg.channel.send("```ml\n" + comandosep[1] + "perdeu " + comandosep[2] + " pontos de vida temporários\n```") }
+            else {msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');}
         }
     }
 })

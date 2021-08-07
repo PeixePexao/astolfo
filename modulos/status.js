@@ -8,10 +8,13 @@ function status() {
         if (fs.existsSync(`${nomes[0]}.json`)) {
             const datasub = fs.readFileSync(`${nomes[0]}.json`)
             var personagem = JSON.parse(datasub);
-            conteudo = conteudo + nomes[0] + ": " + personagem.hp + "\n"
-        }
-        else if (i != (linhas.length - 1)) {
-            conteudo = conteudo + nomes[0] + ": [indisponível]\n"
+            conteudo = conteudo + nomes[0] + ": " + (personagem.hp + personagem.hptemp);
+            if (personagem.hptemp != 0) {
+                conteudo = conteudo + " (" + personagem.hp + " normais, " + personagem.hptemp + " temporários)\n"
+            }
+            else {
+                conteudo = conteudo + "\n"
+            }
         }
     }
     conteudo = conteudo + "```";

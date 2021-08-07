@@ -14,7 +14,7 @@ function dano(comando) {
         return false
     }
     else {
-        danoTotal = comando[2];
+        danoTotal = parseInt(comando[2]);
         const data = fs.readFileSync(`${nome}.json`);
         valores = JSON.parse(data);
         valores.hp = valores.hp - danoTotal;
@@ -28,7 +28,7 @@ function cura(comando) {
         return false
     }
     else {
-        curaTotal = comando[2];
+        curaTotal = parseInt(comando[2]);
         const data = fs.readFileSync(`${nome}.json`);
         valores = JSON.parse(data);
         valores.hp = valores.hp + curaTotal;

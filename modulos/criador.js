@@ -23,7 +23,8 @@ function criarPer(mensagem) {
             cont = cont + `  "magias${i+1}base":${mensagem[i+3]},\n`
         }
         cont = cont + `  "magias9":${mensagem[11]},\n`
-        cont = cont + `  "magias9base":${mensagem[11]}\n`
+        cont = cont + `  "magias9base":${mensagem[11]},\n`
+        cont = cont + `"hptemp": 0`;
         
         cont = cont + "}"
 
