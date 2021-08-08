@@ -13,7 +13,8 @@ const remFila = require('./modulos/remFila.js')
 const status = require('./modulos/status.js')
 const iniciativa = require('./modulos/iniciativa')
 const banco = require('./modulos/banco')
-const hptemp = require("./modulos/hptemp.js")
+const hptemp = require("./modulos/hptemp.js");
+const addinheiro = require('./modulos/addinheiro.js');
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
@@ -111,6 +112,14 @@ client.on("message", msg => {
         }
         if (comandosep[0] == "banco") {
             msg.channel.send(banco())
+        }
+        if (comandosep[0] == "addinheiro" && checkID(msg.author.id)) {
+            if (addinheiro(comandosep)) {
+                msg.channel.send("```ml\n" + comandosep[1] + " ganhou " + comandosep[2] + " " + comandosep[3] + "\n```");
+            }
+            else {
+                msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
+            }
         }
     }
 })

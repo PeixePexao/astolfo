@@ -24,7 +24,7 @@ function criarPer(mensagem) {
         }
         cont = cont + `  "magias9":${mensagem[11]},\n`
         cont = cont + `  "magias9base":${mensagem[11]},\n`
-        cont = cont + `"hptemp": 0`;
+        cont = cont + `"hptemp": 0,\n`;
         cont = cont + `"pc": 0,\n"pp": 0,\n"pe": 0,\n "po": 0,\n"pl": 0\n`
         
         cont = cont + "}"
