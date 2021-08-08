@@ -30,3 +30,5 @@
     -status
     -addtemp NOME PONTOS
     -remtemp NOME PONTOS
+    -ganhar NOME VALOR TIPO
+    -gastar NOME VALOR TIPO
