@@ -6,7 +6,7 @@ function addtemp(comando) {
         const data = fs.readFileSync(`${nome}.json`)
         var pessoa = JSON.parse(data);
         pessoa.hptemp = pessoa.hptemp + parseInt(valor);
-        fs.writeFileSync(`${nome}.json`, JSON.stringify(pessoa, 4, null));
+        fs.writeFileSync(`${nome}.json`, JSON.stringify(pessoa, null, 4));
         return true;
     }
     else {
@@ -21,7 +21,7 @@ function remtemp(comando) {
         const data = fs.readFileSync(`${nome}.json`)
         var pessoa = JSON.parse(data);
         pessoa.hptemp = pessoa.hptemp - parseInt(valor);
-        fs.writeFileSync(`${nome}.json`, JSON.stringify(pessoa, 4, null));
+        fs.writeFileSync(`${nome}.json`, JSON.stringify(pessoa, null, 4));
         return true;
     }
     else {

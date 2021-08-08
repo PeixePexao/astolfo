@@ -12,6 +12,7 @@ const fila = require('./modulos/fila.js')
 const remFila = require('./modulos/remFila.js')
 const status = require('./modulos/status.js')
 const iniciativa = require('./modulos/iniciativa')
+const banco = require('./modulos/banco')
 const hptemp = require("./modulos/hptemp.js")
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -94,19 +95,22 @@ client.on("message", msg => {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
             }
         }
-        if (comandosep[0] == "status" && checkID(msg.author.id)) {
+        if (comandosep[0] == "status") {
             msg.channel.send(status());
         }
         if (comandosep[0] == "iniciativa" && checkID(msg.author.id)) {
             msg.channel.send(iniciativa())
         }
         if (comandosep[0] == "addtemp" && checkID(msg.author.id)) {
-            if (hptemp.addtemp(comandosep)) {msg.channel.send("```ml\n" + comandosep[1] + "ganhou " + comandosep[2] + " pontos de vida temporários\n```") }
+            if (hptemp.addtemp(comandosep)) {msg.channel.send("```ml\n" + comandosep[1] + " ganhou " + comandosep[2] + " pontos de vida temporários\n```") }
             else {msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');}
         }
         if (comandosep[0] == "remtemp" && checkID(msg.author.id)) {
-            if (hptemp.remtemp(comandosep)) {msg.channel.send("```ml\n" + comandosep[1] + "perdeu " + comandosep[2] + " pontos de vida temporários\n```") }
+            if (hptemp.remtemp(comandosep)) {msg.channel.send("```ml\n" + comandosep[1] + " perdeu " + comandosep[2] + " pontos de vida temporários\n```") }
             else {msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');}
+        }
+        if (comandosep[0] == "banco") {
+            msg.channel.send(banco())
         }
     }
 })
