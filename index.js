@@ -16,6 +16,7 @@ const banco = require('./modulos/banco')
 const hptemp = require("./modulos/hptemp.js");
 const addinheiro = require('./modulos/addinheiro.js');
 const remdinheiro = require('./modulos/remdinheiro.js');
+const fs = require('fs')
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
@@ -24,14 +25,14 @@ client.on("message", msg => {
     if (msg.content.startsWith("-")) {
         var comandosep = buro(msg.content);
         if(comandosep[0] == "criarper" && checkID(msg.author.id)) {
-            var cria = criarPer(comandosep);
+            var cria = criarPer(comandosep, msg.guild.id);
             if (cria == false) {
                 msg.channel.send('```diff\n-Opa, parece que você mandou o comando errado! A forma correta é -criarper NOME VIDA SL1 SL2 SL3 SL4 SL5 SL6 SL7 SL8 SL9\n```')
             }
             else {msg.channel.send('```diff\n+Foi criado o seu personagem. Obrigado por me usar <3\n```')}
         }
         if (comandosep[0] == "dano" && checkID(msg.author.id)) {
-            if(dano.dano(comandosep)) {
+            if(dano.dano(comandosep, msg.guild.id)) {
                 msg.channel.send('```ml\nEita! ' + comandosep[1] + ' tomou ' + comandosep[2] + ' pontos de dano!\n```')
             }
             else {
@@ -39,7 +40,7 @@ client.on("message", msg => {
             }
         }
         if (comandosep[0] == "cura" && checkID(msg.author.id)) {
-            if(dano.cura(comandosep)) {
+            if(dano.cura(comandosep, msg.guild.id)) {
                 msg.channel.send('```ml\nHoje não! ' + comandosep[1] + " regenerou " + comandosep[2] + " pontos de vida! <3\n```");
             }
             else {
@@ -47,7 +48,7 @@ client.on("message", msg => {
             }
         }
         if (comandosep[0] == "slots" && checkID(msg.author.id)) {
-            var resposta = slots(comandosep);
+            var resposta = slots(comandosep, msg.guild.id);
             if (resposta == "errado") {
                 msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
             }
@@ -56,7 +57,7 @@ client.on("message", msg => {
             }
         }
         if (comandosep[0] == "recuperar" && checkID(msg.author.id)) {
-            if(recuperar(comandosep)) {
+            if(recuperar(comandosep, msg.guild.id)) {
                 msg.channel.send('```ml\n' + comandosep[1] + ' recuperou suas magias! <3\n```');
             }
             else {
@@ -64,7 +65,7 @@ client.on("message", msg => {
             }
         }
         if (comandosep[0] == "castar" && checkID(msg.author.id)) {
-            var cast = castar(comandosep);
+            var cast = castar(comandosep, msg.guild.id);
             switch(cast) {
                 case "erroNE":
                     msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');
@@ -79,7 +80,7 @@ client.on("message", msg => {
 
         }
         if (comandosep[0] == "addfila" && checkID(msg.author.id)) {
-            if(addFila(comandosep)) {
+            if(addFila(comandosep, msg.guild.id)) {
                 msg.channel.send("```ml\n" + comandosep[1] + " foi adicionado à fila. <3```");
             }
             else {
@@ -87,10 +88,10 @@ client.on("message", msg => {
             }
         }
         if (comandosep[0] == "fila" && checkID(msg.author.id)) {
-            msg.channel.send(fila())
+            msg.channel.send(fila(msg.guild.id))
         }
         if (comandosep[0] == "remfila" && checkID(msg.author.id)) {
-            if (remFila(comandosep)) {
+            if (remFila(comandosep, msg.guild.id)) {
                 msg.channel.send("```ml\n" + comandosep[1] + " foi removido da fila de iniciativa!\n```");
             }
             else {
@@ -98,24 +99,24 @@ client.on("message", msg => {
             }
         }
         if (comandosep[0] == "status") {
-            msg.channel.send(status());
+            msg.channel.send(status(msg.guild.id));
         }
         if (comandosep[0] == "iniciativa" && checkID(msg.author.id)) {
-            msg.channel.send(iniciativa())
+            msg.channel.send(iniciativa(msg.guild.id))
         }
         if (comandosep[0] == "addtemp" && checkID(msg.author.id)) {
-            if (hptemp.addtemp(comandosep)) {msg.channel.send("```ml\n" + comandosep[1] + " ganhou " + comandosep[2] + " pontos de vida temporários\n```") }
+            if (hptemp.addtemp(comandosep, msg.guild.id)) {msg.channel.send("```ml\n" + comandosep[1] + " ganhou " + comandosep[2] + " pontos de vida temporários\n```") }
             else {msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');}
         }
         if (comandosep[0] == "remtemp" && checkID(msg.author.id)) {
-            if (hptemp.remtemp(comandosep)) {msg.channel.send("```ml\n" + comandosep[1] + " perdeu " + comandosep[2] + " pontos de vida temporários\n```") }
+            if (hptemp.remtemp(comandosep, msg.guild.id)) {msg.channel.send("```ml\n" + comandosep[1] + " perdeu " + comandosep[2] + " pontos de vida temporários\n```") }
             else {msg.channel.send('```diff\n-Não consegui executar esse comando. Tem certeza que o digitou corretamente? <3\n```');}
         }
         if (comandosep[0] == "banco") {
-            msg.channel.send(banco())
+            msg.channel.send(banco(msg.guild.id))
         }
         if (comandosep[0] == "ganhar" && checkID(msg.author.id)) {
-            if (addinheiro(comandosep)) {
+            if (addinheiro(comandosep, msg.guild.id)) {
                 msg.channel.send("```ml\n" + comandosep[1] + " ganhou " + comandosep[2] + " " + comandosep[3] + "\n```");
             }
             else {
@@ -123,7 +124,7 @@ client.on("message", msg => {
             }
         }
         if (comandosep[0] == "gastar" && checkID(msg.author.id)) {
-            if (remdinheiro(comandosep)) {
+            if (remdinheiro(comandosep, msg.guild.id)) {
                 msg.channel.send("```ml\n" + comandosep[1] + " gastou " + comandosep[2] + " " + comandosep[3] + "\n```");
             }
             else {
@@ -134,6 +135,14 @@ client.on("message", msg => {
 })
 
 client.login(process.env.TOKEN); //Loga como o bot no Discord
+
+client.on('guildCreate', guild => {
+    if (!fs.existsSync(`./${guild.id}`)) {
+        fs.mkdirSync(`./${guild.id}`)
+        fs.closeSync(fs.openSync(`./${guild.id}/fila.csv`, 'a'))
+    }
+
+})
 
 function checkID(idSender) {
     if (idSender == process.env.IDMAT || idSender == process.env.IDMEU || idSender == process.env.IDSIQ) {

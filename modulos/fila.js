@@ -1,6 +1,6 @@
-function fila() {
+function fila(id) {
     const fs = require('fs');
-    const data = fs.readFileSync('fila.csv');
+    const data = fs.readFileSync(`./${id}/fila.csv`);
     const mod = data.slice(0, -1);
     var linhas = mod.toString().split('\n')
     var pessoas = [];

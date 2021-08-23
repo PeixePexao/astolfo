@@ -1,10 +1,10 @@
-function addinheiro(comando) {
+function addinheiro(comando, id) {
     const fs = require('fs');
     const nome = comando[1];
     const valor = parseInt(comando[2])
     const tipo = comando[3]
     const tipos = ["pc", "pp", "pe", "po", "pl"];
-    if (fs.existsSync(`${nome}.json`) && !isNaN(valor) && tipos.includes(tipo)) {
+    if (fs.existsSync(`./${id}/${nome}.json`) && !isNaN(valor) && tipos.includes(tipo)) {
         const data = fs.readFileSync(`${nome}.json`);
         var pessoa = JSON.parse(data);
         var totalprevio = parseInt(pessoa[tipo]);
@@ -36,7 +36,7 @@ function addinheiro(comando) {
 
         }
         var conteudo = JSON.stringify(pessoa, null, 4)
-        fs.writeFileSync(`${nome}.json`, conteudo);
+        fs.writeFileSync(`./${id}/${nome}.json`, conteudo);
         return true
 
     }

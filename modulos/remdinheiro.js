@@ -1,11 +1,11 @@
-function remdinheiro(comando) {
+function remdinheiro(comando, id) {
     const fs = require('fs');
     const nome = comando[1]
     var quant = parseInt(comando[2])
     const tipo = comando[3]
     const tipos = ["pc", "pp", "pe", "po", "pl"];
-    if (fs.existsSync(`${nome}.json`) && !isNaN(quant) && tipos.includes(tipo)) {
-        const data = fs.readFileSync(`${nome}.json`)
+    if (fs.existsSync(`./${id}/${nome}.json`) && !isNaN(quant) && tipos.includes(tipo)) {
+        const data = fs.readFileSync(`./${id}/${nome}.json`)
         var pessoa = JSON.parse(data);
         
         switch(tipo) {
@@ -80,7 +80,7 @@ function remdinheiro(comando) {
         }
         
         const escrita = JSON.stringify(pessoa, null, 4)
-        fs.writeFileSync(`${nome}.json`, escrita);
+        fs.writeFileSync(`./${id}/${nome}.json`, escrita);
         return true;
     }
     else {return false} 

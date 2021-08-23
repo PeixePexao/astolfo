@@ -1,6 +1,6 @@
-function remFila(comando) {
+function remFila(comando, id) {
     const fs = require('fs');
-    data = fs.readFileSync('fila.csv') 
+    data = fs.readFileSync(`./${id}/fila.csv`) 
     linhas = data.toString().split('\n');
     var newLinhas = [];
     var achei = false;
@@ -15,7 +15,7 @@ function remFila(comando) {
     }
     conteudo = newLinhas.join('\n')
     if (achei == true) {
-        fs.writeFileSync('fila.csv', conteudo);
+        fs.writeFileSync(`./${id}/fila.csv`, conteudo);
         return true
     }
     else {return false}

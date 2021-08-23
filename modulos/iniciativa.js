@@ -36,9 +36,9 @@ function dado(linha) {
 function compare(a, b) {
     return b - a
 }
-function iniciativa() {
+function iniciativa(id) {
     const fs = require('fs');
-    const data = fs.readFileSync('fila.csv');
+    const data = fs.readFileSync(`./${id}/fila.csv`);
     var linhas = data.toString().split('\n');
     var dados = []
     for (i = 0; i < linhas.length; i++) {
